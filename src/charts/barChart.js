@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   XYPlot,
   XAxis,
@@ -11,6 +11,7 @@ import {
 import { ChartWrapper } from "../shared";
 
 const BarChart = props => {
+  const [index, setIndex] = useState(null);
   const data = [
     { y: 100, x: "Jan" },
     { y: 112, x: "Feb" },
@@ -29,6 +30,13 @@ const BarChart = props => {
   const chartWidth = 500;
   const chartHeight = 300;
   const chartDomain = [0, chartHeight + 200];
+
+  const test = data.map((d, i) => ({
+    ...d,
+    index: i,
+    color: i === index ? 1 : 2
+  }));
+
   return (
     <ChartWrapper>
       <XYPlot
@@ -39,8 +47,15 @@ const BarChart = props => {
       >
         <XAxis />
         <YAxis />
-        <VerticalBarSeries data={data} />
-        <MarkSeries animation={{ damping: 9, stiffness: 300 }} data={data} />
+        <VerticalBarSeries
+          onValueMouseOver={(datapoint, event) => {
+            setIndex(datapoint.index);
+          }}
+          onValueMouseOut={() => {
+            setIndex(null);
+          }}
+          data={test}
+        />
         <LabelSeries
           data={data.map(obj => {
             return { ...obj, label: obj.y.toString() };
