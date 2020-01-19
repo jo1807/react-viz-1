@@ -4,34 +4,19 @@ import {
   XAxis,
   YAxis,
   LabelSeries,
-  VerticalBarSeries,
-  MarkSeries
+  VerticalBarSeries
 } from "react-vis";
 
-import { ChartWrapper } from "../shared";
+import { ChartWrapper, Button } from "../shared/ui";
 
 const BarChart = props => {
   const [index, setIndex] = useState(null);
-  const data = [
-    { y: 100, x: "Jan" },
-    { y: 112, x: "Feb" },
-    { y: 230, x: "Mar" },
-    { y: 268, x: "Apr" },
-    { y: 300, x: "May" },
-    { y: 310, x: "Jun" },
-    { y: 315, x: "Jul" },
-    { y: 340, x: "Aug" },
-    { y: 388, x: "Sep" },
-    { y: 404, x: "Oct" },
-    { y: 442, x: "Nov" },
-    { y: 447, x: "Dec" }
-  ];
 
   const chartWidth = 500;
-  const chartHeight = 300;
-  const chartDomain = [0, chartHeight + 200];
+  const chartHeight = 200;
+  const chartDomain = [0, chartHeight];
 
-  const test = data.map((d, i) => ({
+  const barData = props.data.map((d, i) => ({
     ...d,
     index: i,
     color: i === index ? 1 : 2
@@ -54,16 +39,17 @@ const BarChart = props => {
           onValueMouseOut={() => {
             setIndex(null);
           }}
-          data={test}
+          data={barData}
         />
         <LabelSeries
-          data={data.map(obj => {
+          data={props.data.map(obj => {
             return { ...obj, label: obj.y.toString() };
           })}
           labelAnchorX="middle"
           labelAnchorY="text-after-edge"
         />
       </XYPlot>
+      <Button onClick={props.onClick}>Update with random data</Button>
     </ChartWrapper>
   );
 };
