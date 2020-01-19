@@ -1,22 +1,18 @@
 import React from "react";
 import { RadialChart } from "react-vis";
 
-import { ChartWrapper } from "../shared";
+import { ChartWrapper, Button } from "../shared/ui";
 
 const PieChart = props => {
-  const dataClicks = [
-    { label: "Views", angle: 94 },
-    { label: "Clicks", angle: 3 }
-  ];
-
   return (
     <ChartWrapper>
       <RadialChart
-        data={dataClicks}
+        data={props.data}
         width={300}
         height={300}
         showLabels={true}
       />
+      <Button onClick={props.onClick}>Update with random data</Button>
     </ChartWrapper>
   );
 };

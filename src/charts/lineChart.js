@@ -1,23 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   XYPlot,
   XAxis,
   YAxis,
   VerticalGridLines,
   HorizontalGridLines,
-  LineSeries
+  LineSeries,
+  MarkSeries
 } from "react-vis";
 import "../../node_modules/react-vis/dist/style.css"; // css styling from the react-vis node module
 
-import { ChartWrapper } from "../shared";
+import { ChartWrapper, Button } from "../shared/ui";
 
 const LineChart = props => {
-  const data = [
-    { x: 0, y: 8 },
-    { x: 1, y: 5 },
-    { x: 2, y: 4 }
-  ];
-
   return (
     <ChartWrapper>
       <XYPlot height={400} width={400}>
@@ -25,8 +20,10 @@ const LineChart = props => {
         <HorizontalGridLines />
         <XAxis />
         <YAxis />
-        <LineSeries data={data} />
+        <LineSeries data={props.data} />
+        <MarkSeries data={props.data} stroke="white" />
       </XYPlot>
+      <Button onClick={props.onClick}>Update with random data</Button>
     </ChartWrapper>
   );
 };
