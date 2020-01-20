@@ -14,3 +14,7 @@ export const Button = styled.button`
   border: none;
   outline: none;
 `;
+
+export const SubTitle = styled.h3`
+  paddingtop: 1rem;
+`;
