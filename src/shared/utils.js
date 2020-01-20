@@ -50,3 +50,6 @@ export const getPieChartData = () => {
     };
   });
 };
+
+export const getUpdatedNumber = updatedNumber =>
+  updatedNumber === 1 ? `${updatedNumber} time` : `${updatedNumber} times`;
